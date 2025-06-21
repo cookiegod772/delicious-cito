@@ -1,11 +1,52 @@
 
-import { Button } from "@/components/ui/button"; import { Card, CardContent } from "@/components/ui/card"; import { useState } from "react";
+import './App.css';
 
-export default function DeliciousCitosStore() { const [cart, setCart] = useState([]);
+function App() {
+  const products = [
+    {
+      name: "Choco-Liciouscito",
+      description: "Rich, gooey chocolate chip cookie made with devil’s food cake mix.",
+      price: 3,
+      image: "/images/choco-liciouscito.png",
+    },
+    {
+      name: "Macadamia Dreamcito",
+      description: "White cake mix with macadamia nuts and white chocolate chips.",
+      price: 3.5,
+      image: "/images/macadamia-dreamcito.png",
+    },
+    {
+      name: "Lemoncito Pop",
+      description: "Lemon cake mix cookie with a zesty pop and white glaze.",
+      price: 3,
+      image: "/images/lemoncito-pop.png",
+    },
+    {
+      name: "Strawberry Sugarcito",
+      description: "Soft strawberry cake mix cookie with white chocolate chunks.",
+      price: 3,
+      image: "/images/strawberry-sugarcito.png",
+    },
+  ];
 
-const products = [ { name: "Choco-Liciouscito", description: "Rich, gooey chocolate chip cookie made with devil’s food cake mix.", price: 3, image: "/images/choco-liciouscito.png", }, { name: "Macadamia Dreamcito", description: "White cake mix with macadamia nuts and white chocolate chips.", price: 3.5, image: "/images/macadamia-dreamcito.png", }, { name: "Lemoncito Pop", description: "Lemon cake mix cookie with a zesty pop and white glaze.", price: 3, image: "/images/lemoncito-pop.png", }, { name: "Strawberry Sugarcito", description: "Soft strawberry cake mix cookie with white chocolate chunks.", price: 3, image: "/images/strawberry-sugarcito.png", }, ];
+  return (
+    <div className="App" style={{ padding: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+        <img src="/images/delicious-citos-banner.png" alt="Delicious Citos Logo" style={{ width: '300px' }} />
+      </div>
+      <h1 style={{ textAlign: 'center' }}>Delicious-Citos Cookie Drop</h1>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '20px' }}>
+        {products.map((product, idx) => (
+          <div key={idx} style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '10px', width: '200px' }}>
+            <img src={product.image} alt={product.name} style={{ width: '100%', borderRadius: '10px' }} />
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+            <p><strong>${product.price.toFixed(2)}</strong></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
-const addToCart = (product) => { setCart([...cart, product]); };
-
-return ( <div className="p-6"> <div className="flex justify-center mb-6"> <img src="/images/delicious-citos-banner.png" alt="Delicious Citos Logo" className="w-full max-w-lg rounded-xl shadow-lg" /> </div> <p className="mb-6 text-lg text-center">KC's underground cookie drop. Small batch. Face-free. Crave-heavy.</p> <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"> {products.map((product, index) => ( <Card key={index}> <CardContent className="p-4"> <img src={product.image} alt={product.name} className="rounded-lg mb-2" /> <h2 className="text-xl font-semibold">{product.name}</h2> <p className="text-sm text-muted-foreground mb-2">{product.description}</p> <p className="font-bold">${product.price.toFixed(2)}</p> <Button onClick={() => addToCart(product)} className="mt-2 w-full">Add to Cart</Button> </CardContent> </Card> ))} </div> </div> ); }
-
+export default App;
